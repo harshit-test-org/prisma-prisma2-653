@@ -1,0 +1,22 @@
+generator photon {
+  provider = "photonjs"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:dev.db"
+}
+
+model products {
+  product_id       Int                @id
+  name             String
+  description      String?
+  product_variants product_variants[]
+}
+
+model product_variants {
+  product_variants_id Int      @id
+  sku                 String?
+  product             products @map(name: "product_id")
+  descriptions        String?
+}
